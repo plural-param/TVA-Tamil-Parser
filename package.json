@@ -1,0 +1,38 @@
+{
+  "name": "tamil-parser-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "./copy-next.sh",
+    "start": "next start",
+    "pm2": "pm2 start npm --name 'TamilParser' -- start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.26",
+    "@mui/icons-material": "^5.14.19",
+    "@mui/lab": "^5.0.0-alpha.155",
+    "@mui/material": "^5.14.20",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.7",
+    "@mui/system": "^5.14.20",
+    "@vercel/analytics": "^1.1.1",
+    "axios": "^1.6.2",
+    "buffer": "^6.0.3",
+    "next": "14.0.4",
+    "nodemailer": "^6.9.13",
+    "react": "^18",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "resend": "^3.2.0",
+    "sharp": "^0.33.2",
+    "styled-components": "^6.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4"
+  }
+}
