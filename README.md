@@ -1,26 +1,17 @@
 ## Tamil Parser UI (Next.js)
 ## Getting Started
-#### Requirements
-- Node.js LTS 20
-- npm
+### Requirements
+- [Node.js LTS 20](https://nodejs.org/en/download/package-manager)
 
-#### Installation
-```bash
-npm install
+### Installation
+To install PM2
+```shell
+npm install pm2 -g
 ```
 
-#### Development
-```bash
-npm run dev
+### Deployment
+before run this command, change the `<password>` into your actual root password.
+```shell
+sh deploy.sh
 ```
 
-#### Production
-```bash
-npm run build
-
-npm run start
-```
-
-
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

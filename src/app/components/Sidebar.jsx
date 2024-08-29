@@ -64,12 +64,6 @@ export default function Sidebar({children}) {
                     </ListItemIcon>
                     <ListItemText primary="GraphView"/>
                 </ListItemButton>
-                <ListItemButton button component="a" href="http://10.2.6.188/conllu-validate/" target="_blank">
-                    <ListItemIcon>
-                        <Checklist/>
-                    </ListItemIcon>
-                    <ListItemText primary="Validator"/>
-                </ListItemButton>
                 <ListItemButton onClick={handleSPClick}>
                     <ListItemIcon>
                         <LibraryBooks/>
@@ -135,8 +129,8 @@ export default function Sidebar({children}) {
                         <Box/>
 
                         <Stack alignItems={"center"} justifyContent={"center"} direction="row" spacing={2}>
-                            <Image src={'/static/kanithamizh.png'} alt={'Kani Thamizh'} width={150} height={150}/>
-                            <Image src={'/static/kalaignar.png'} alt={'Kalaignar'} width={100} height={80}/>
+                            <Image src={'/tamilparser/static/kanithamizh.png'} alt={'Kani Thamizh'} width={150} height={150}/>
+                            <Image src={'/tamilparser/static/kalaignar.png'} alt={'Kalaignar'} width={100} height={80}/>
                             <Stack alignItems={"center"} justifyContent={"center"}>
                                 <>
                                     <Typography variant="h4" noWrap component="div"
@@ -158,7 +152,7 @@ export default function Sidebar({children}) {
                             </Stack>
 
                         </Stack>
-                        <Image src={'/static/LOGO.png'} alt={'LOGO'} width={150} height={100}/>
+                        <Image src={'/tamilparser/static/LOGO.png'} alt={'LOGO'} width={150} height={100}/>
                     </Stack>
                 </Toolbar>
             </AppBar>
@@ -194,7 +188,7 @@ export default function Sidebar({children}) {
                     orientation="horizontal" in={openDrawer1}
                     sx={{mt: `calc(185px)`, ml: `${drawerWidth}px`, flexShrink: 0}}>
                     <Paper sx={{width: drawerPaperWidth}}>
-                        <iframe src={`/guidelines/${
+                        <iframe src={`/TamilParserAssetStaticPrefix/guidelines/${
                             drawerShowType === "POS" ? "pos_guidelines.pdf" :
                                 drawerShowType === "MAS" ? "morph_guidelines.pdf" :
                                     drawerShowType === "SAS" && "treebank_guidelines.pdf"
