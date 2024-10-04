@@ -12,7 +12,7 @@ export async function getResult(formData) {
     try {
         const text = formData.get('text')
 
-        const response = await axios.post(`http://plural.iiit.ac.in/api/tamilparser/server/get_trankit_graph_data`, {
+        const response = await axios.post(`http://localhost:8000/get_trankit_graph_data`, {
             data: text,
         }, {
             headers: {

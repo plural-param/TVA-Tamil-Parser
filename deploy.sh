@@ -12,15 +12,15 @@ fi
 
 npm run build
 
-if [ -d "/var/www/html/TamilParserAssetStaticPrefix" ]; then
-    sudo -S rm -rf /var/www/html/TamilParserAssetStaticPrefix/*
+if [ -d "/var/www/tva/TamilParserAssetStaticPrefix" ]; then
+    sudo -S rm -rf /var/www/tva/TamilParserAssetStaticPrefix/*
 else
-    sudo -S mkdir /var/www/html/TamilParserAssetStaticPrefix
+    sudo -S mkdir /var/www/tva/TamilParserAssetStaticPrefix
 fi
 
-sudo -S mkdir /var/www/html/TamilParserAssetStaticPrefix/_next
+sudo -S mkdir /var/www/tva/TamilParserAssetStaticPrefix/_next
 
-sudo -S cp -R .next/* /var/www/html/TamilParserAssetStaticPrefix/_next
-sudo -S cp -R public/* /var/www/html/TamilParserAssetStaticPrefix/
+sudo -S cp -R .next/* /var/www/tva/TamilParserAssetStaticPrefix/_next
+sudo -S cp -R public/* /var/www/tva/TamilParserAssetStaticPrefix/
 
 pm2 start "npm run start" --name TamilParser
