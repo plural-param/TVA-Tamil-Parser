@@ -1,8 +1,8 @@
-export function middleware(request) {
-    if (request.nextUrl.pathname === "/") {
-        return Response.redirect(new URL("/tamilparser", request.nextUrl));
-    }
-}
+// export function middleware(request) {
+//     if (request.nextUrl.pathname === "/") {
+//         return Response.redirect(new URL("/tamilparser", request.nextUrl));
+//     }
+// }
 
 export const config = {
     matcher: [
