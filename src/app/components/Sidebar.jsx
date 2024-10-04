@@ -51,14 +51,14 @@ export default function Sidebar({children}) {
         <Box sx={{mt: "3.5rem"}}>
             <Divider/>
             <List>
-                <ListItemButton onClick={() => router.push('/tamilparser')} selected={pathname === '/'}>
+                <ListItemButton onClick={() => router.push('/')} selected={pathname === '/'}>
                     <ListItemIcon>
                         <Dashboard/>
                     </ListItemIcon>
                     <ListItemText primary="Parser"/>
                 </ListItemButton>
                 {/*<ListItemButton onClick={() => router.push('tamilparser/graphview')} selected={pathname === '/graphview'}>*/}
-                <ListItemButton button component="a" href="/tamilparser/graphview">
+                <ListItemButton button component="a" href="/graphview">
                     <ListItemIcon>
                         <GraphicEq/>
                     </ListItemIcon>
