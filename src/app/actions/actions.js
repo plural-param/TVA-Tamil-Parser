@@ -37,7 +37,7 @@ export async function getResult(formData) {
 
 export async function getUDGraph(data) {
     try {
-        let response = await axios.post('http://localhost:8090/visualizeGraph',
+        let response = await axios.post('http://localhost:8000/visualizeGraph',
             {data: data}, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
