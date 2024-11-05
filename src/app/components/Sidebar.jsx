@@ -15,7 +15,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import {useState} from "react";
 import {Chip, Collapse, Grid, Paper, Stack} from "@mui/material";
-import {ExpandLess, ExpandMore, Dashboard, LibraryBooks, GraphicEq, Checklist} from "@mui/icons-material";
+import {ExpandLess, ExpandMore, Dashboard, LibraryBooks} from "@mui/icons-material";
 
 // Icons
 import Image from "next/image";
@@ -24,13 +24,11 @@ import Link from "next/link";
 import {usePathname, useRouter} from "next/navigation";
 
 const drawerWidth = 233;
-const drawerPaperWidth = 450;
 
 export default function Sidebar({children}) {
     const router = useRouter();
     const pathname = usePathname();
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [drawerShowType, setDrawerShowType] = useState(null);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -41,11 +39,14 @@ export default function Sidebar({children}) {
         setOpenSP(!openSP);
     };
 
-    const [openDrawer1, setOpenDrawer1] = useState(false)
-    const handleDrawer1Click = (type) => {
-        setOpenDrawer1(!openDrawer1)
-        setDrawerShowType(drawerShowType ? null : type)
-    }
+    const handleOpenPdf = (guidelines_type) => {
+        const pdfUrl = `/tamilparser/guidelines/${
+            guidelines_type === "POS" ? "pos_guidelines.pdf" :
+                guidelines_type === "MAS" ? "morph_guidelines.pdf" :
+                    guidelines_type === "SAS" && "treebank_guidelines.pdf"
+        }`;
+        window.open(pdfUrl, '_blank');
+    };
 
     const drawer = (
         <Box sx={{mt: "3.5rem"}}>
@@ -57,13 +58,6 @@ export default function Sidebar({children}) {
                     </ListItemIcon>
                     <ListItemText primary="Parser"/>
                 </ListItemButton>
-                {/*<ListItemButton onClick={() => router.push('tamilparser/graphview')} selected={pathname === '/graphview'}>*/}
-                <ListItemButton button component="a" href="/graphview">
-                    <ListItemIcon>
-                        <GraphicEq/>
-                    </ListItemIcon>
-                    <ListItemText primary="GraphView"/>
-                </ListItemButton>
                 <ListItemButton onClick={handleSPClick}>
                     <ListItemIcon>
                         <LibraryBooks/>
@@ -73,24 +67,21 @@ export default function Sidebar({children}) {
                 </ListItemButton>
                 <Collapse in={openSP} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItemButton sx={{pl: 0}} onClick={() => handleDrawer1Click("POS")}
-                                        selected={drawerShowType === "POS"}>
+                        <ListItemButton sx={{pl: 0}} onClick={() => handleOpenPdf("POS")}>
                             <ListItemIcon sx={{pl: 2}}>
                                 <SubdirectoryArrowRightIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Parts of Speech"/>
                         </ListItemButton>
 
-                        <ListItemButton sx={{pl: 0}} onClick={() => handleDrawer1Click("MAS")}
-                                        selected={drawerShowType === "MAS"}>
+                        <ListItemButton sx={{pl: 0}} onClick={() => handleOpenPdf("MAS")}>
                             <ListItemIcon sx={{pl: 2}}>
                                 <SubdirectoryArrowRightIcon/>
                             </ListItemIcon>
                             <ListItemText primary="Morph Analysis"/>
                         </ListItemButton>
 
-                        <ListItemButton sx={{pl: 0}} onClick={() => handleDrawer1Click("SAS")}
-                                        selected={drawerShowType === "SAS"}>
+                        <ListItemButton sx={{pl: 0}} onClick={() => handleOpenPdf("SAS")}>
                             <ListItemIcon sx={{pl: 2}}>
                                 <SubdirectoryArrowRightIcon/>
                             </ListItemIcon>
@@ -169,7 +160,7 @@ export default function Sidebar({children}) {
                     }}
                     sx={{
                         display: {xs: 'block', sm: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth, mt: `calc(120px)`},
                     }}
                 >
                     {drawer}
@@ -178,24 +169,12 @@ export default function Sidebar({children}) {
                     variant="permanent"
                     sx={{
                         display: {xs: 'none', sm: 'block'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth, mt: `calc(130px)`}
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth, mt: `calc(120px)`}
                     }}
                     open
                 >
                     {drawer}
                 </Drawer>
-                <Collapse
-                    orientation="horizontal" in={openDrawer1}
-                    sx={{mt: `calc(185px)`, ml: `${drawerWidth}px`, flexShrink: 0}}>
-                    <Paper sx={{width: drawerPaperWidth}}>
-                        <iframe src={`/TamilParserAssetStaticPrefix/guidelines/${
-                            drawerShowType === "POS" ? "pos_guidelines.pdf" :
-                                drawerShowType === "MAS" ? "morph_guidelines.pdf" :
-                                    drawerShowType === "SAS" && "treebank_guidelines.pdf"
-                        }#toolbar=0&navpanes=0&scrollbar=0`} width={"100%"}
-                                height={"750px"}/>
-                    </Paper>
-                </Collapse>
             </Box>
 
             <Box
@@ -203,7 +182,6 @@ export default function Sidebar({children}) {
                 sx={{
                     flexGrow: 1, p: 3,
                     width: {sm: `calc(100% - ${drawerWidth}px)`},
-                    ml: {sm: `${openDrawer1 ? drawerPaperWidth : 0}px`},
                     transition: 'margin-left 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms'
                 }}
             >

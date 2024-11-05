@@ -4,6 +4,7 @@ import {useState} from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import toast from "react-hot-toast";
 import {getResult} from "@/app/actions/actions";
+import Button from "@mui/material/Button";
 
 const options = [
     {label: 'சொற் கூறுகள் (Parts of Speech)', value: 'pos'},
@@ -14,6 +15,7 @@ const options = [
 
 export default function TextArea({setAllData, setData, setSelectedValues}) {
     const [text, setText] = useState('');
+    const [textLength, setTextLength] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
 
     async function handleSelectChange(event, value) {
@@ -22,6 +24,19 @@ export default function TextArea({setAllData, setData, setSelectedValues}) {
             result.push(data.value);
         })
         setSelectedValues(result);
+    }
+
+    function handleClear() {
+        setSelectedValues([]);
+        setText('');
+        setAllData(null);
+    }
+
+    function handleTextChange(e) {
+        const inputText = e.target.value;
+        setText(inputText);
+        const textLength = inputText.length;
+        setTextLength(textLength);
     }
 
     async function handleAnnotate(e) {
@@ -49,20 +64,21 @@ export default function TextArea({setAllData, setData, setSelectedValues}) {
     return (
         <Box component={'form'} onSubmit={handleAnnotate} sx={{mt: 2}}>
             <TextField variant={'outlined'}
-                       onChange={event => setText(event.target.value)}
+                       onChange={handleTextChange}
                        value={text} name={'text'}
                        fullWidth minRows={1} maxRows={5} multiline
                        inputProps={{
                            maxLength: 1000,
                        }}
-                       placeholder={`தமிழ்த் தொடரை இங்கு பதிவிடவும் (Please enter tamil sentence here)...`}
+                       placeholder={`தமிழ்த் தொடரை இங்கு பதிவிடவும் (Please enter tamil sentence here)`}
                        required
+                       helperText={`${textLength}/1000`}
             />
             <Stack spacing={2} direction="row" sx={{mt: 2}}>
                 <Autocomplete
                     multiple
                     filterSelectedOptions
-                    sx={{width: "88.5%"}}
+                    sx={{width: "82.5%"}}
                     disablePortal
                     size="small"
                     id="options"
@@ -72,6 +88,13 @@ export default function TextArea({setAllData, setData, setSelectedValues}) {
                     options={options}
                     renderInput={(params) => <TextField {...params} label="Options"/>}
                 />
+                <Button
+                    variant="contained"
+                    color="error"
+                    onClick={handleClear}
+                >
+                    Clear
+                </Button>
                 <LoadingButton
                     loading={isLoading}
                     type="submit"
